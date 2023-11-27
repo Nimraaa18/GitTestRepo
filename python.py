@@ -1,6 +1,9 @@
 This is Python file
-<<<<<<< HEAD
+HEAD
 Python  File
-=======
+development
+New python file
+
 Python File
->>>>>>> development2
+development2
+main
