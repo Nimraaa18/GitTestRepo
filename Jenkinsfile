@@ -2,21 +2,31 @@ pipeline {
     agent any
     
     environment {
-        MAVEN_HOME = tool 'Maven' // Use the Maven tool configured in Jenkins
+        MAVEN_HOME = tool 'Maven'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the source code from the repository
-                checkout scm
+                script {
+                    checkout(
+                        [
+                            $class: 'GitSCM',
+                            branches: [[name: '*/main']],
+                            userRemoteConfigs: [[
+                                credentialsId: 'token-jenkins',
+                                url: 'https://github.com/Nimraaa18/GitTestRepo.git'
+                            ]]
+                        ]
+                    )
+                }
             }
         }
 
         stage('Build') {
             steps {
-                // Build the Java project using Maven
                 script {
+                    // Build the Java project using Maven
                     sh "${MAVEN_HOME}/bin/mvn clean install"
                 }
             }
@@ -24,8 +34,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                // Run tests using Maven
                 script {
+                    // Run tests using Maven
                     sh "${MAVEN_HOME}/bin/mvn test"
                 }
             }
@@ -47,4 +57,5 @@ pipeline {
         }
     }
 }
+
 
