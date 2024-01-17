@@ -14,7 +14,7 @@ pipeline {
                             $class: 'GitSCM',
                             branches: [[name: '*/main']],
                             userRemoteConfigs: [[
-                                credentialsId: 'token-jenkins',
+                                credentialsId: 'jenkinstoken',
                                 url: 'https://github.com/Nimraaa18/GitTestRepo.git'
                             ]]
                         ]
