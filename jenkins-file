@@ -1,12 +1,23 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
+   stages {
+    stage('Checkout') {
+        steps {
+            checkout(
+                scm: [
+                    $class: 'GitSCM', 
+                    branches: [[name: 'main']], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [[url: 'https://github.com/Nimraaa18/GitTestRepo.git']]
+                ]
+            )
         }
+    }
+}
+
 
         stage('Build') {
             steps {
