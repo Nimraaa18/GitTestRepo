@@ -19,19 +19,22 @@ pipeline {
 
         stage('Build') {
             steps {
+                echo 'Building the application'
                 sh 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
+                echo 'Running tests'
                 sh 'mvn test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'deploying the application'
+                echo 'Deploying the application'
+                
             }
         }
     }
@@ -39,11 +42,11 @@ pipeline {
     post {
         success {
             echo 'Build and test succeeded.'
-            // Add post-build success actions if needed
+            
         }
         failure {
             echo 'Build or test failed.'
-            // Add post-build failure actions if needed
+            
         }
     }
 }
