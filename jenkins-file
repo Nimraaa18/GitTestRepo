@@ -1,23 +1,21 @@
 pipeline {
     agent any
 
-   stages {
-    stage('Checkout') {
-        steps {
-            checkout(
-                scm: [
-                    $class: 'GitSCM', 
-                    branches: [[name: 'main']], 
-                    doGenerateSubmoduleConfigurations: false, 
-                    extensions: [], 
-                    submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/Nimraaa18/GitTestRepo.git']]
-                ]
-            )
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout(
+                    scm: [
+                        $class: 'GitSCM', 
+                        branches: [[name: 'main']], 
+                        doGenerateSubmoduleConfigurations: false, 
+                        extensions: [], 
+                        submoduleCfg: [], 
+                        userRemoteConfigs: [[url: 'https://github.com/Nimraaa18/GitTestRepo.git']]
+                    ]
+                )
+            }
         }
-    }
-}
-
 
         stage('Build') {
             steps {
@@ -33,17 +31,19 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                
+                // Add deployment steps here
             }
         }
     }
 
     post {
         success {
-            echo 'Build and test succeeded.
+            echo 'Build and test succeeded.'
+            // Add post-build success actions if needed
         }
         failure {
             echo 'Build or test failed.'
+            // Add post-build failure actions if needed
         }
     }
 }
